@@ -1,5 +1,11 @@
+import CommonHeader from "../conponents/CommonHeader";
+import Blog from "../conponents/Blog";
+
 export default function Home() {
     return (
-        <h1>he</h1>
+        <>
+            <CommonHeader/>
+            <Blog/>
+        </>
     )
 }
