@@ -1,1 +1,3 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# masatora.net
+
+The source of [masatora.net](masatora.net)
