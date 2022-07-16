@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 
-const CommonHeader = () => {
+export const CommonHeader = () => {
     return (
         <>
             <Head>
@@ -18,5 +18,3 @@ const CommonHeader = () => {
         </>
     )
 }
-
-export default CommonHeader;
