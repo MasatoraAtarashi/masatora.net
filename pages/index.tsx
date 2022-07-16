@@ -1,5 +1,7 @@
+import CommonHeader from '../components/CommonHeader'
+
 export default function Home() {
     return (
-        <h1>he</h1>
+        <CommonHeader/>
     )
 }
