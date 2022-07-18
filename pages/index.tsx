@@ -1,40 +1,27 @@
 import {Header} from "../components/Header";
 import {GetStaticProps} from "next";
-import {BlogList} from "../entities/blogList";
-import Link from "next/link";
-import {getAllPosts} from "../api/blogs";
+import {getAllArticle} from "../api/blogs";
+import {ArticleList} from "../entities/blog";
+import {Blog} from "../components/Blog";
 
-type BlogListProps = {
-    blogList: BlogList
+type BlogProps = {
+    articleList: ArticleList
 }
 
-export const getStaticProps: GetStaticProps<BlogListProps> = async () => {
-    const blogList = await getAllPosts()
+export const getStaticProps: GetStaticProps<BlogProps> = async () => {
+    const articleList = await getAllArticle()
     return {
         props: {
-            blogList: blogList
+            articleList: articleList
         }
     }
 }
 
-export default function Home({blogList}) {
+export default function Home(props) {
     return (
         <>
             <Header/>
-
-            {/*TODO: コンポーネント切り出し*/}
-            <section>
-                <h2>Blog</h2>
-                <ul>
-                    {blogList.map(({id, title}) => (
-                        <li key={id}>
-                            <Link href={`/blog/${id}`}>
-                                <a>{title}</a>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            </section>
+            <Blog {...props} />
         </>
     )
 }
