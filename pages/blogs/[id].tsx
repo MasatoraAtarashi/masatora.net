@@ -3,6 +3,7 @@ import {Article} from "../../entities/blog";
 import {getAllArticle, getArticle} from "../../api/blogs";
 import {CommonHeader} from "../../components/CommonHeader";
 import Link from "next/link";
+import React from "react";
 
 type BlogDetailProps = {
     article: Article
@@ -32,7 +33,6 @@ export const getStaticProps: GetStaticProps<BlogDetailProps, BlogDetailParams> =
 }
 
 const BlogDetail: NextPage<BlogDetailProps> = ({article}) => {
-// TODO: コンポーネント切り出し
     return (
         <>
             <CommonHeader/>
