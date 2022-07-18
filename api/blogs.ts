@@ -1,26 +1,42 @@
 import {Article, ArticleList} from "../entities/blog";
+import {getRequest} from "./common";
+
+type ArticleListResponse = {
+    contents?: ArticleResponse[]
+}
+
+type ArticleResponse = {
+    id?: string
+    title?: string
+    content?: string
+    createdAt?: string
+    updatedAt?: string
+}
 
 export async function getAllArticle(): Promise<ArticleList> {
-    // TODO: mock
-    let articles: ArticleList = [
-        {
-            id: "id",
-            title: "title",
-            content: "content",
-            createdAt: "2022-07-16T11:53:19.656Z",
-            updatedAt: "2022-07-16T11:53:19.656Z"
-        }
-    ]
-    return articles
+    const response = await getRequest<ArticleListResponse>('blogs')
+    return toArticleList(response)
 }
 
 export async function getArticle(id: string): Promise<Article> {
-    // TODO: mock
+    const response = await getRequest<ArticleResponse>(`blogs/${id}`)
+    return toArticle(response)
+}
+
+function toArticleList(data: ArticleListResponse): ArticleList {
+    let articleList: ArticleList = []
+    data.contents.map((articleResponse) => {
+        articleList.push(toArticle(articleResponse))
+    })
+    return articleList
+}
+
+function toArticle(data: ArticleResponse): Article {
     return {
-        id: "id",
-        title: "a",
-        content: "a",
-        createdAt: "2022-07-16T11:53:19.656Z",
-        updatedAt: "2022-07-16T11:53:19.656Z"
+        id: data.id || '',
+        title: data.title || '',
+        content: data.content || '',
+        createdAt: data.createdAt || '',
+        updatedAt: data.updatedAt || '',
     }
 }
