@@ -16,8 +16,8 @@ type BlogDetailParams = {
 export const getStaticPaths: GetStaticPaths = async () => {
     let articleList = await getAllArticle();
     return {
-        paths: articleList.map((id) => ({
-            params: {id: "id"}
+        paths: articleList.map((article) => ({
+            params: {id: article.id}
         })),
         fallback: false
     }
