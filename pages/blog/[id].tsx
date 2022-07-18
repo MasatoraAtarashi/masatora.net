@@ -1,45 +1,44 @@
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
-import {Blog} from "../../entities/blog";
-import {getAllPosts, getPost} from "../../api/blogs";
+import {Article} from "../../entities/blog";
+import {getAllArticle, getArticle} from "../../api/blogs";
 import {CommonHeader} from "../../components/CommonHeader";
 import Link from "next/link";
 
-type BlogProps = {
-    // TODO: 命名見直す
-    blog: Blog
+type BlogDetailProps = {
+    article: Article
 }
 
-type BlogParams = {
+type BlogDetailParams = {
     id: string
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    let allPosts = await getAllPosts();
+    let articleList = await getAllArticle();
     return {
-        paths: allPosts.map((id) => ({
+        paths: articleList.map((id) => ({
             params: {id: "id"}
         })),
         fallback: false
     }
 }
 
-export const getStaticProps: GetStaticProps<BlogProps, BlogParams> = async ({params}) => {
-    const post = await getPost(params.id);
+export const getStaticProps: GetStaticProps<BlogDetailProps, BlogDetailParams> = async ({params}) => {
+    const article = await getArticle(params.id);
     return {
         props: {
-            blog: post
+            article: article
         }
     }
 }
 
-const BlogPage: NextPage<BlogProps> = ({blog}) => {
+const BlogDetail: NextPage<BlogDetailProps> = ({article}) => {
 // TODO: コンポーネント切り出し
     return (
         <>
             <CommonHeader/>
-            <h1>{blog.title}</h1>
-            <p>{blog.createdAt}</p>
-            <p>{blog.content}</p>
+            <h1>{article.title}</h1>
+            <p>{article.createdAt}</p>
+            <p>{article.content}</p>
 
             <div>
                 <Link href="/">
@@ -50,4 +49,4 @@ const BlogPage: NextPage<BlogProps> = ({blog}) => {
     )
 }
 
-export default BlogPage
+export default BlogDetail

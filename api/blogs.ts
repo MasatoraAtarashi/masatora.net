@@ -1,10 +1,8 @@
-import {BlogList} from "../entities/blogList";
-import {Blog} from "../entities/blog";
+import {Article, ArticleList} from "../entities/blog";
 
-// TODO: BlogListという命名はおかしい
-export async function getAllPosts(): Promise<BlogList> {
+export async function getAllArticle(): Promise<ArticleList> {
     // TODO: mock
-    let allPosts: BlogList = [
+    let articles: ArticleList = [
         {
             id: "id",
             title: "title",
@@ -13,11 +11,10 @@ export async function getAllPosts(): Promise<BlogList> {
             updatedAt: "2022-07-16T11:53:19.656Z"
         }
     ]
-    return allPosts
+    return articles
 }
 
-// TODO: Blogという名称もおかしい
-export async function getPost(id: string): Promise<Blog> {
+export async function getArticle(id: string): Promise<Article> {
     // TODO: mock
     return {
         id: "id",
