@@ -4,11 +4,15 @@ import {BlogList} from "../entities/blogList";
 import Link from "next/link";
 import {getAllPosts} from "../api/blogs";
 
-export const getStaticProps: GetStaticProps<BlogList> = async () => {
+type BlogListProps = {
+    blogList: BlogList
+}
+
+export const getStaticProps: GetStaticProps<BlogListProps> = async () => {
     const blogList = await getAllPosts()
     return {
         props: {
-            blogList
+            blogList: blogList
         }
     }
 }
