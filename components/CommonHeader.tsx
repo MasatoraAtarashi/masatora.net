@@ -29,6 +29,10 @@ export const CommonHeader = () => {
                 margin: 0;
                 padding: 0;
               }
+
+              .site-name:hover {
+                text-decoration: underline;
+              }
             `}</style>
         </>
     )

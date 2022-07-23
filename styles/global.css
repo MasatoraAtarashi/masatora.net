@@ -7,3 +7,9 @@ body {
 a:hover {
     text-decoration: underline;
 }
+
+.article-date {
+    display: block;
+    color: darkgray;
+    font-size: 15px;
+}

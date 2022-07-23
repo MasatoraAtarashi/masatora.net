@@ -40,14 +40,30 @@ const BlogDetail: NextPage<BlogDetailProps> = (props) => {
     return (
         <>
             <CommonHeader/>
-            <h1>{props.article.title}</h1>
-            <p>{props.article.createdAt}</p>
-            {parse(props.contentHtml)}
-            <div>
-                <Link href="/">
-                    <a>← Back to home</a>
-                </Link>
+            <div className={'article-detail'}>
+                <time className={'article-date'}>{props.article.createdAt}</time>
+                <h1>{props.article.title}</h1>
+                {parse(props.contentHtml)}
+                <div>
+                    <Link href="/">
+                        <a>← Back to home</a>
+                    </Link>
+                </div>
             </div>
+            {/*<Footer/>*/}
+            <style jsx>{`
+              h1 {
+                font-size: 40px;
+                margin: 0;
+              }
+
+              .article-detail {
+                margin: 0 auto;
+                width: 50%;
+                padding: 30px;
+                font-size: 15px;
+              }
+            `}</style>
         </>
     )
 }

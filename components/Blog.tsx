@@ -14,9 +14,7 @@ export const Blog: React.FC<BlogProps> = ({articleList}) => {
                 <section>
                     {articleList.map(({id, title, createdAt, description}) => (
                         <li key={id} style={{listStyle: 'none'}}>
-                            <time>
-                                {createdAt}
-                            </time>
+                            <time className={'article-date'}>{createdAt}</time>
                             <Link href={`/blogs/${id}`}>
                                 <a className={'article-title'}>{title}</a>
                             </Link>
@@ -26,11 +24,7 @@ export const Blog: React.FC<BlogProps> = ({articleList}) => {
                 </section>
             </div>
             <style jsx>{`
-              time {
-                display: block;
-                color: darkgray;
-                font-size: 15px;
-              }
+              
 
               .article-title {
                 font-size: 25px;
