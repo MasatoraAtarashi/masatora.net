@@ -7,7 +7,7 @@ export const CommonHeader = () => {
         <>
             <div style={{textAlign: "center"}}>
                 <Head>
-                    <title style={{}}>masatora.net</title>
+                    <title>masatora.net</title>
                 </Head>
                 <Link href="/">
                     <Image
@@ -20,9 +20,16 @@ export const CommonHeader = () => {
                     />
                 </Link>
                 <Link href="/">
-                    <h1>masatora.net</h1>
+                    <h1 className={'site-name'}>masatora.net</h1>
                 </Link>
             </div>
+            <style jsx>{`
+              .site-name {
+                font-weight: 800;
+                margin: 0;
+                padding: 0;
+              }
+            `}</style>
         </>
     )
 }

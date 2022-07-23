@@ -8,9 +8,14 @@ export const Footer = () => {
                 color: 'white',
                 width: '100%',
                 position: 'absolute',
-                bottom: '0'
+                bottom: '0',
+                left: '0'
             }}>
-                <ul>
+                <ul style={{
+                    width: '50%',
+                    margin: '0 auto',
+                    padding: '30px'
+                }}>
                     <li>
                         <Link href={`/`}>
                             <a style={{color: 'white'}}>ホーム</a>

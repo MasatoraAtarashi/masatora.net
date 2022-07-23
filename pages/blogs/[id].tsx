@@ -1,12 +1,10 @@
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
-import {Article} from "../../entities/blog";
+import {Article, parseMarddown} from "../../entities/blog";
 import {getAllArticle, getArticle} from "../../api/blogs";
 import {CommonHeader} from "../../components/CommonHeader";
 import Link from "next/link";
 import React from "react";
 import parse from 'html-react-parser';
-import {remark} from "remark";
-import html from 'remark-html';
 
 type BlogDetailProps = {
     article: Article
@@ -29,14 +27,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<BlogDetailProps, BlogDetailParams> = async ({params}) => {
     const article = await getArticle(params.id);
-    const contentHtml = await remark()
-        .use(html)
-        .process(article.content)
-        .then((processedContent) =>
-            processedContent.toString()
-        ).catch(err => {
-            throw err
-        })
+    const contentHtml = await parseMarddown(article.content)
     return {
         props: {
             article: article,
