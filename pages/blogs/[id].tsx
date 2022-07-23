@@ -1,5 +1,5 @@
 import {GetStaticPaths, GetStaticProps, NextPage} from "next";
-import {Article} from "../../entities/blog";
+import {Article, parseMarddown} from "../../entities/blog";
 import {getAllArticle, getArticle} from "../../api/blogs";
 import {CommonHeader} from "../../components/CommonHeader";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import parse from 'html-react-parser';
 
 type BlogDetailProps = {
     article: Article
+    contentHtml: string
 }
 
 type BlogDetailParams = {
@@ -26,26 +27,43 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<BlogDetailProps, BlogDetailParams> = async ({params}) => {
     const article = await getArticle(params.id);
+    const contentHtml = await parseMarddown(article.content)
     return {
         props: {
-            article: article
+            article: article,
+            contentHtml: contentHtml
         }
     }
 }
 
-const BlogDetail: NextPage<BlogDetailProps> = ({article}) => {
+const BlogDetail: NextPage<BlogDetailProps> = (props) => {
     return (
         <>
             <CommonHeader/>
-            <h1>{article.title}</h1>
-            <p>{article.createdAt}</p>
-            {parse(article.content)}
-
-            <div>
-                <Link href="/">
-                    <a>← Back to home</a>
-                </Link>
+            <div className={'article-detail'}>
+                <time className={'article-date'}>{props.article.createdAt}</time>
+                <h1>{props.article.title}</h1>
+                {parse(props.contentHtml)}
+                <div>
+                    <Link href="/">
+                        <a>← Back to home</a>
+                    </Link>
+                </div>
             </div>
+            {/*<Footer/>*/}
+            <style jsx>{`
+              h1 {
+                font-size: 40px;
+                margin: 0;
+              }
+
+              .article-detail {
+                margin: 0 auto;
+                width: 50%;
+                padding: 30px;
+                font-size: 15px;
+              }
+            `}</style>
         </>
     )
 }

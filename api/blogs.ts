@@ -9,6 +9,7 @@ type ArticleResponse = {
     id?: string
     title?: string
     content?: string
+    description?: string
     createdAt?: string
     updatedAt?: string
 }
@@ -36,6 +37,7 @@ function toArticle(data: ArticleResponse): Article {
         id: data.id || '',
         title: data.title || '',
         content: data.content || '',
+        description: data.description || '',
         createdAt: data.createdAt || '',
         updatedAt: data.updatedAt || '',
     }

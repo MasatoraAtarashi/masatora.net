@@ -6,19 +6,37 @@ type BlogProps = {
     articleList: ArticleList
 }
 
+
 export const Blog: React.FC<BlogProps> = ({articleList}) => {
     return (
-        <section>
-            <h2>Blog</h2>
-            <ul>
-                {articleList.map(({id, title}) => (
-                    <li key={id}>
-                        <Link href={`/blogs/${id}`}>
-                            <a>{title}</a>
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </section>
+        <>
+            <div>
+                <section>
+                    {articleList.map(({id, title, createdAt, description}) => (
+                        <li key={id} style={{listStyle: 'none'}}>
+                            <time className={'article-date'}>{createdAt}</time>
+                            <Link href={`/blogs/${id}`}>
+                                <a className={'article-title'}>{title}</a>
+                            </Link>
+                            <p className={'article-content'}>{description}</p>
+                        </li>
+                    ))}
+                </section>
+            </div>
+            <style jsx>{`
+              
+
+              .article-title {
+                font-size: 25px;
+              }
+
+              .article-content {
+                font-size: 15px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+              }
+            `}</style>
+        </>
     )
 }
