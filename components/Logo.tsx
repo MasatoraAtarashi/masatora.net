@@ -12,13 +12,15 @@ type LogoProps = {
 export const Logo: React.FC<LogoProps> = (props) => {
     return (
         <Link href={props.link}>
-            <Image
-                priority
-                src={"/images/" + props.imageName}
-                height={props.height || 30}
-                width={props.width || 30}
-                alt={props.alt || 'logo'}
-            />
+            <a target={"_blank"}>
+                <Image
+                    priority
+                    src={"/images/" + props.imageName}
+                    height={props.height || 30}
+                    width={props.width || 30}
+                    alt={props.alt || 'logo'}
+                />
+            </a>
         </Link>
     )
 }
