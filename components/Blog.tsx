@@ -12,7 +12,7 @@ export const Blog: React.FC<BlogProps> = ({articleList}) => {
         <>
             <div>
                 <section>
-                    {articleList.map(({id, title, createdAt, content}) => (
+                    {articleList.map(({id, title, createdAt, description}) => (
                         <li key={id} style={{listStyle: 'none'}}>
                             <time>
                                 {createdAt}
@@ -20,7 +20,7 @@ export const Blog: React.FC<BlogProps> = ({articleList}) => {
                             <Link href={`/blogs/${id}`}>
                                 <a className={'article-title'}>{title}</a>
                             </Link>
-                            <p className={'article-content'}>{content}</p>
+                            <p className={'article-content'}>{description}</p>
                         </li>
                     ))}
                 </section>
