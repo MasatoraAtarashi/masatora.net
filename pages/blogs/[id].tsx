@@ -4,6 +4,7 @@ import {getAllArticle, getArticle} from "../../api/blogs";
 import {CommonHeader} from "../../components/CommonHeader";
 import Link from "next/link";
 import React from "react";
+import parse from 'html-react-parser';
 
 type BlogDetailProps = {
     article: Article
@@ -38,7 +39,7 @@ const BlogDetail: NextPage<BlogDetailProps> = ({article}) => {
             <CommonHeader/>
             <h1>{article.title}</h1>
             <p>{article.createdAt}</p>
-            <p>{article.content}</p>
+            {parse(article.content)}
 
             <div>
                 <Link href="/">
